@@ -1,0 +1,94 @@
+{
+  "id": "e05b210ea2fb4bae8e845abf9bb14e61",
+  "account_id": "64643d080b23122d5ddaee8c",
+  "user_id": "64643e3e18a6cb1f46863711",
+  "name": "incoming call - chengyu",
+  "description": "Incoming call",
+  "trigger_type": "voice_inbound",
+  "status": "published",
+  "version": 20,
+  "previous_version": "296896306ca2453386f0d37a50da5c16",
+  "created_at": "2024-02-26T10:40:28.454451Z",
+  "updated_at": "2024-02-26T10:40:53.713310Z",
+  "valid": true,
+  "validation_status": "valid",
+  "initial_step_id": "66e48e8fc2114f0696596b504e984574",
+  "group_id": "18bc4d7d46ff4c6784153da054c0d66e",
+  "pre_conditions": {},
+  "supported_trigger_types": [],
+  "steps": [
+    {
+      "id": "66e48e8fc2114f0696596b504e984574",
+      "name": "Initial step",
+      "component": { "name": "inbound_voice-ZjE1ZjM0MG", "version": "1.3.x" },
+      "properties": {},
+      "exits": [
+        {
+          "_key": "cee349b5-e03d-426c-9b9b-b0375af2bb15",
+          "name": "ok",
+          "transition": "f746f57fced64be6bf744211c13bdb45"
+        }
+      ],
+      "context_mappings": {},
+      "created_at": "2023-05-19T02:18:47.019000Z"
+    },
+    {
+      "id": "f746f57fced64be6bf744211c13bdb45",
+      "name": "assignment",
+      "component": { "name": "assignment_and_dial-M2JhZTViYT", "version": "3.23.x" },
+      "properties": {
+        "priority": { "priorities_list": 5 },
+        "time_limit": { "time": 60, "waiting_music": {} },
+        "users_to_ring": { "exhaust": true, "forced_queueing": false, "number_of_users": 1 },
+        "waiting_message": {},
+        "assignment_parameters": { "agents": { "agents_list": ["64643e3e18a6cb1f46863711"] } }
+      },
+      "context_mappings": {},
+      "created_at": "2023-05-19T02:19:03.301000Z",
+      "exits": [
+        {
+          "_key": "14e308c6-7e58-4700-b20d-873f80ed5395",
+          "name": "call_finished",
+          "transition": "fd8fd84335b34d5aa8fe9f1cec86b4e7"
+        },
+        {
+          "_key": "346e6a7c-f96f-4805-8358-9ded05b3d5ec",
+          "name": "call_no_answer",
+          "transition": "5a998355191a46f6bc64975a5fc4c4d3"
+        },
+        {
+          "_key": "b1683672-b0b4-4c90-88a8-f124dbbc9245",
+          "name": "time_limit_reached",
+          "transition": "5a998355191a46f6bc64975a5fc4c4d3"
+        },
+        {
+          "_key": "fc6821bf-3006-483e-8f9d-047d6e461896",
+          "name": "no_match",
+          "transition": "5a998355191a46f6bc64975a5fc4c4d3"
+        }
+      ]
+    },
+    {
+      "id": "fd8fd84335b34d5aa8fe9f1cec86b4e7",
+      "name": "end",
+      "component": { "name": "hangup_call-OTE5ZmM0NW", "version": "1.0.x" },
+      "properties": {},
+      "exits": [],
+      "context_mappings": {},
+      "created_at": "2023-05-19T02:20:41.992000Z"
+    },
+    {
+      "id": "5a998355191a46f6bc64975a5fc4c4d3",
+      "name": "leave voicemail",
+      "component": { "name": "voicemail-NGQ0ZDE5Nj", "version": "2.4.x" },
+      "properties": {
+        "record_parameters": { "with_transcription_max_duration": 120 },
+        "assignment_parameters": { "agents": { "agents_list": ["64afc751dfdee040233e0c56"] } }
+      },
+      "exits": [],
+      "context_mappings": {},
+      "created_at": "2023-05-19T02:21:03.939000Z"
+    }
+  ],
+  "model": {}
+}
