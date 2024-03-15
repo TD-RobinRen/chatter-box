@@ -188,6 +188,15 @@
           },
           {
             "$ref": "components_schema#/definitions/AssignChatWithCapacityStep"
+          },
+          {
+            "$ref": "components_schema#/definitions/PlayAudioStep"
+          },
+          {
+            "$ref": "components_schema#/definitions/InputIVRStep"
+          },
+          {
+            "$ref": "components_schema#/definitions/CallbackStep"
           }
         ],
         "required": [
