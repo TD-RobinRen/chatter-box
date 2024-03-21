@@ -1,0 +1,235 @@
+{
+    "InboundVoiceStep": {
+        "name": "inbound_voice-ZjE1ZjM0MG",
+        "title": "Incoming call",
+        "version": "1.3.0",
+        "description": "Initial component for the inbound voice flow definitions, On the Preferences tab of the Incoming call component, you can define the variables that will be populated with the values generated on exit, by mapping eight data points to the flow variables: contact.name, contact.address, contact.company, contact.location, contact.exact_match, source_phone, interaction_id, and destination_phone.",
+        "initial_step": true,
+        "interactive": false,
+        "dynamic": false,
+        "max_execution_time": 300000,
+        "default_exits": [
+          {
+            "name": "ok",
+            "type": "mandatory",
+            "title": "Ok",
+            "description": "If the component succeeds",
+            "effects": {
+            "voice_participant": true
+            }
+          }
+        ]
+    },
+    "AssignmentAndDialStep": {
+        "name": "assignment_and_dial-M2JhZTViYT",
+        "title": "Assignment and Dial",
+        "version": "3.23.1",
+        "description": "Request an assignment and dial the agents return for this interaction.You can assign an interaction through ring group(s), attribute(s), or agent(s). Please note that all assignment types are mutually exclusive and that you can only select one of them per assignment component.",
+        "initial_step": false,
+        "interactive": false,
+        "dynamic": false,
+        "max_execution_time": 14415000,
+        "supported_trigger_types": [
+          "voice_inbound",
+          "module"
+        ],
+        "default_exits": [
+          {
+            "name": "call_finished",
+            "type": "optional",
+            "title": "Call finished",
+            "description": "There was a successful match and a conversation with an agent has finished.",
+            "effects": {
+              "post_call": true
+            }
+          },
+          {
+            "name": "call_no_answer",
+            "type": "mandatory",
+            "title": "No answer",
+            "description": "There was at least one successful dial attempt but no agent was available."
+          },
+          {
+            "name": "time_limit_reached",
+            "type": "mandatory",
+            "title": "Maximum waiting time reached",
+            "description": "There was a match but all agents are busy and the configured time out was reached."
+          },
+          {
+            "name": "no_match",
+            "type": "mandatory",
+            "title": "No match found",
+            "description": "A match could not be found."
+          }
+        ]
+    },
+    "VoicemailStep": {
+    "name": "voicemail-NGQ0ZDE5Nj",
+    "title": "Voicemail",
+    "version": "2.4.3",
+    "description": "Here you can assign voicemails to specific agents or ring groups. Alternatively, you can use your preconfigured variables which will assign voicemail to agents/ring groups according to the previous events of your call flow. If your selection falls under the “Agents” assignment category, the variable to use will have to correspond to the agent’s email.",
+    "initial_step": false,
+    "interactive": false,
+    "dynamic": false,
+    "max_execution_time": 15000,
+    "supported_trigger_types": [
+        "voice_inbound",
+        "module"
+    ],
+    "default_exits": [
+    ]
+    },
+    "PlayAudioStep": {
+    "name": "play_audio-NjFkZDU2MG",
+    "title": "Play Audio",
+    "version": "2.16.1",
+    "description": "Configure the audio message the user will hear.The Play audio component allows you to configure an audio message.There are three ways of playing the target message: Text to Speech, Audio File Upload, and Other Sources.",
+    "initial_step": false,
+    "interactive": false,
+    "dynamic": false,
+    "max_execution_time": 120000,
+    "supported_trigger_types": [
+        "api",
+        "voice_inbound",
+        "module",
+        "voice_outbound"
+    ],
+    "default_exits": [
+        {
+        "name": "ok",
+        "type": "mandatory",
+        "title": "Ok",
+        "description": "If the component succeeds"
+        }
+    ]
+    },
+    "StandardIVRStep": {
+    "name": "standard_ivr-M2NlYzMzNz",
+    "title": "Standard IVR",
+    "version": "2.12.1",
+    "icon": "standard_ivr",
+    "description": "Allows a contact to input data via the dial pad, The Standard IVR component enables the contact person to select one of multiple options. Based on the selection that is made, the interaction will then follow the most appropriate path and can be routed to the most suited agent or group of agents within a team.",
+    "initial_step": false,
+    "interactive": true,
+    "dynamic": false,
+    "max_execution_time": 1800000,
+    "supported_trigger_types": [
+        "api",
+        "voice_inbound",
+        "module",
+        "voice_outbound"
+    ],
+    "default_exits": [
+        {
+        "name": "timeout",
+        "type": "mandatory",
+        "title": "Timeout",
+        "condition": {
+            "type": "object",
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "properties": {
+            "timeout": {
+                "type": "integer",
+                "title": "Time in seconds",
+                "default": 5,
+                "minimum": 1,
+                "description": "Integer indicating in seconds for how long we will wait for the input. It resets as new digits are input"
+            }
+            },
+            "description": "Timeout in seconds",
+            "additionalProperties": false
+        }
+        },
+        {
+        "name": "invalid",
+        "type": "mandatory",
+        "title": "Invalid",
+        "description": "If an invalid key is pressed"
+        }
+    ]
+    },
+    "CallbackStep": {
+    "name": "callback-OTU1MjIyYm",
+    "title": "Request callback from queue",
+    "version": "6.29.1",
+    "icon": "callback",
+    "description": "The Request Callback from queue component enables the callers to be called back later without losing their place in the assignment queue. The callback can be made to:The original number.Another phone number (defined previously in the flow).An extension number; this means the caller is going to be called back on the original number + extension number.",
+    "initial_step": false,
+    "interactive": false,
+    "dynamic": false,
+    "max_execution_time": 10000,
+    "supported_trigger_types": [
+        "voice_inbound",
+        "module"
+    ],
+    "default_exits": [
+        {
+        "name": "call_finished",
+        "type": "optional",
+        "title": "Call finished",
+        "description": "There was a successful match and a conversation with an agent has finished",
+        "effects": {
+            "post_call": true,
+            "voice_participant": true
+        }
+        },
+        {
+        "name": "invalid",
+        "type": "mandatory",
+        "title": "Invalid Inbound Phone Number",
+        "description": "If contact is calling with anonymous or invalid caller id"
+        },
+        {
+        "name": "invalid_outbound_caller_id",
+        "type": "optional",
+        "title": "Invalid Outbound Caller Id",
+        "description": "If selected caller id is invalid"
+        }
+    ]
+    },
+    "InputIVRStep": {
+        "name": "input_ivr-ZDgxODY4Mz",
+        "title": "Input IVR",
+        "version": "2.8.1",
+        "icon": "input_ivr",
+        "description": "Allows a contact to input data via the dial pad",
+        "initial_step": false,
+        "interactive": true,
+        "dynamic": false,
+        "max_execution_time": 1800000,
+        "supported_trigger_types": [
+          "api",
+          "voice_inbound",
+          "module"
+        ],
+        "default_exits": [
+          {
+            "name": "ok",
+            "type": "mandatory",
+            "title": "Ok",
+            "description": "If the component succeeds"
+          },
+          {
+            "name": "timeout",
+            "type": "mandatory",
+            "title": "Timeout",
+            "description": "If the component exceeded the parameterized timeout",
+            "condition": {
+              "type": "object",
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "properties": {
+                "timeout": {
+                  "type": "integer",
+                  "title": "Time in seconds",
+                  "default": 5,
+                  "minimum": 1,
+                  "description": "Integer indicating in seconds for how long we will wait for the input. It resets as new digits are input"
+                }
+              },
+              "description": "Timeout in seconds",
+              "additionalProperties": false
+            }
+          }
+        ]
+    }
+}
